@@ -45,7 +45,7 @@ jobs:
           command: terraform apply -input=false -auto-approve
       - run: 
           name: terraform destroy
-          command: terraform destroy
+          command: terraform destroy -input=false -auto-approve
       - persist_to_workspace:
           root: .
           paths: .
