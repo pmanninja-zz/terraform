@@ -39,6 +39,9 @@ jobs:
       - run:
           name: terraform init
           command: terraform init -input=false
+      -run:
+          name: terraform plan
+          command: terraform plan -input=false
       - run:
           name: terraform apply
           command: terraform apply -input=false -auto-approve
