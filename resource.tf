@@ -2,14 +2,6 @@ provider "aws" {
     region = "us-east-1"
 }
 
-terraform{
-    backend "s3" {
-       bucket = "nutrien-sandbox-terraform-state"
-       key = "PJ-test-terraform.tfstate"
-       region = "us-east-1" 
-    }
-}
-
 resource "aws_instance" "test" {
     count = 1
     ami = "ami-2d39803a"
