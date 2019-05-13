@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 terraform: &terraform
   docker:
@@ -42,7 +42,7 @@ jobs:
       -run:
           name: terraform plan
           command: terraform plan -input=false
-      - run:
+      -run:
           name: terraform apply
           command: terraform apply -input=false -auto-approve
       - persist_to_workspace:
