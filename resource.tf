@@ -35,16 +35,6 @@ resource "aws_autoscaling_group" "test" {
     max_size = "${var.max_size}"
 
 }
-/*
-resource "aws_autoscaling_policy" "scale_out" {
-  name = "scale-out-frontend-app"
-  //autoscaling_group_name = "${module.frontend.asg_name}"
-  adjustment_type = "ChangeInCapacity"
-  policy_type = "SimpleScaling"
-  scaling_adjustment = 1
-  cooldown = 100
-}
-*/
 
 output "asg_name" {
   value = "${aws_autoscaling_group.test.name}"
