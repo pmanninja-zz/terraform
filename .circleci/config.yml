@@ -45,17 +45,3 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - terraform_validate:
-          context: datacenternetwork-general-sandbox
-      - terraform_build:
-          context: datacenternetwork-general-sandbox
-          filters:
-            branches:
-              only: master
-          requires:
-            - terraform_validate
