@@ -27,8 +27,8 @@ jobs:
           name: Install tflint
           command: curl -L -o /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v0.4.2/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
       - run:
-          name: Check Terraform configurations with tflint
-          command: tflint && 'terraform get'
+          name: Getting Modules
+          command: terraform get
       - persist_to_workspace:
           root: .
           paths: .
