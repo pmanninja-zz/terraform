@@ -29,6 +29,8 @@ jobs:
       - run:
           name: Check Terraform configurations with tflint
           command: tflint
+      - run:
+          name: terraform get
           command: terraform get
       - persist_to_workspace:
           root: .
