@@ -43,7 +43,7 @@ jobs:
       - run:
           name: terraform apply
           command: terraform apply -input=false -auto-approve
-        - run: 
+      - run: 
           name: terraform destroy
           command: terraform destroy
       - persist_to_workspace:
