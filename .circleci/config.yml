@@ -48,3 +48,17 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - validate:
+          #context: datacenternetwork-general-sandbox
+      - build:
+          #context: datacenternetwork-general-sandbox
+          filters:
+            branches:
+              only: master
+          requires:
+            - validate
