@@ -1,5 +1,5 @@
 variable "min_size" {
-  description = "The minimum amount of EC2 instance"
+  description = "The minimum number of EC2 instance in the ASG"
 }
 
 variable "max_size" {
