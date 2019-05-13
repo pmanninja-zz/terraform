@@ -10,7 +10,7 @@ notify:
     - url: https://outlook.office.com/webhook/f56ae5c1-eecf-43ad-83c1-bb0d73bd13b5@5e0b361b-59ed-466e-8759-030448046197/CircleCI/b38cbeb3699648389914128950826ddc/3ead529e-38c0-45d8-b1d5-2126df5677b0
 
 jobs:
-  terraform_validate:
+  validate:
     <<: *terraform
     steps:
       - checkout
@@ -32,7 +32,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
-  terraform_build:
+  build:
     <<: *terraform
     steps:
       - checkout
