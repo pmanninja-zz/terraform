@@ -12,7 +12,7 @@ output "password" {
   value = random_string.password.result
 }
 
-
+/*
 resource "aws_kms_key" "key" {
   description = "sand-meridian-secret-key"
   enable_key_rotation = false
@@ -59,12 +59,11 @@ resource "aws_iam_policy" "kms-use" {
   name = "kmsuse"
   policy = data.aws_iam_policy_document.kms_use.json
 }
-/*
 resource "aws_iam_role_policy_attachment" "attach-to-role" {
   role = "test-key-role"
   policy_arn = aws_iam_policy.kms-use.arn
 }
-*/
+
 resource "aws_iam_policy_attachment" "test-attach" {
   name       = "test-attachment"
   users      = ["Nicole","Pj"]
@@ -72,5 +71,5 @@ resource "aws_iam_policy_attachment" "test-attach" {
   //groups     = ["${aws_iam_group.group.name}"]
   policy_arn = aws_iam_policy.kms-use.arn
 }
-
+*/
 // $aws secretsmanager put-resource-policy --secret-id SECRET_NAME --resource policy file://RESOURCE_POLICY.json
