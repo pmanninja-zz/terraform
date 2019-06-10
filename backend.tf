@@ -11,7 +11,7 @@ resource "random_string" "password" {
 output "password" {
   value = random_string.password.result
 }
-
+//comment line
 /*
 resource "aws_kms_key" "key" {
   description = "sand-meridian-secret-key"
