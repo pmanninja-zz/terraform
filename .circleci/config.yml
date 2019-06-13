@@ -1,0 +1,71 @@
+version: 2
+
+terraform: &terraform
+  docker:
+  - image: hashicorp/terraform:0.12.0
+  working_directory: /tmp/workspace/terraform
+
+jobs:
+  # Installs and runs repo-supervisor
+  repo-supervisor:
+    docker:
+      - image: node:8-stretch
+    steps:
+      - checkout 
+      - run:
+          name: Install repo-supervisor
+          command: |-
+            cd ../ && git clone https://github.com/auth0/repo-supervisor.git && cd repo-supervisor
+            npm install --no-optional
+            npm run build
+      - run:
+          name: Run repo-supervisor
+          command: cd ../repo-supervisor && npm run cli ../project/
+
+  terraform_validate:
+    <<: *terraform
+    steps:
+    - checkout
+    - run:
+        name: terraform init
+        command: terraform init -input=false
+    - run:
+        name: Validate Terraform configurations
+        command: terraform validate
+    - run:
+        name: terraform format
+        command: terraform fmt
+    - run:
+        name: Check if Terraform configurations are properly formatted
+        command: if [[ -n "$(terraform fmt -write=false)" ]]; then echo "Some terraform
+          files need be formatted, run 'terraform fmt' to fix"; exit 1; fi
+    - persist_to_workspace:
+        root: .
+        paths: .
+  terraform_build:
+    <<: *terraform
+    steps:
+    - checkout
+    - run:
+        name: terraform init
+        command: terraform init -input=false
+    - run:
+        name: terraform apply
+        command: terraform apply -input=false -auto-approve
+    - persist_to_workspace:
+        root: .
+        paths: .
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - repo-supervisor
+      - terraform_validate
+      - terraform_build:
+          filters:
+            branches:
+              only: environment/sandbox
+          requires:
+           - repo-supervisor
+           - terraform_validate
